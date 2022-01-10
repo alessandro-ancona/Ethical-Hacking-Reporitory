@@ -1,9 +1,12 @@
 EHR - Ethical Hacking Repository
 
 
-## Link 1
- è una prova
+# Information Gathering
  
-## Link 2
+# Enumeration/Scanning
 
-è una rpova
+# Exploitation
+
+# Privilege Escalation
+
+# Post-Exploitation
