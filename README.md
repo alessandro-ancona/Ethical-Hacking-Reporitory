@@ -6,9 +6,9 @@ EHR - Ethical Hacking Repository
 ## Passive Information Gathering
 
 1. whois: $ whois targetdomain.com
-2. nslookup: $ nslookup -type=<T> targetdomain.com <optional-resolver>
+2. nslookup: $ nslookup -type=[T] targetdomain.com [optional-resolver]
       
-      | <T>   | Result             |
+      | [T]   | Result             |
       |-------|--------------------|
       | A     | IPv4 Addresses     |
       | AAAA  | IPv6 Addresses     |
@@ -17,10 +17,14 @@ EHR - Ethical Hacking Repository
       | SOA   | Start of Authority |
       | TXT   | TXT Records        |
       
-3. dig: $ dig <@optional-resolver> targetdomain.com <T>
+3. dig: $ dig [@optional-resolver] targetdomain.com [T]
 4. DNSDumpster
 
 ## Active Information Gathering
+
+1. ping: $ ping -n 10 [target_ip]
+2. traceroute: $ traceroute [target_ip or domain name]
+3. telnet: $ telnet [target_ip] [port] 
 
 # Enumeration/Scanning
 
