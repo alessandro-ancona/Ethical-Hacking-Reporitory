@@ -25,8 +25,16 @@ EHR - Ethical Hacking Repository
       | intitle  | intitle:admin       | results that contain the specified word in title |
 
 6. Automated Content Discovery:
-      - $ gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-1.0.txt -u http:/target.com/
-8.
+     - $ gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-1.0.txt -u http:/target.com/
+
+## Subdomain Enumeration
+
+1. Check TLS Certificate;
+2. Serach Engines, to reveal subdomains:
+      - GOOGLE: -site:www.targetsite.com site:* .targetsite.com
+
+3. DNS Bruteforce
+      - $ dnsrecon
 
 # Exploitation
 
