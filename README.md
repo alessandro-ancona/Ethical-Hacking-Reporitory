@@ -58,7 +58,7 @@ EHR - Ethical Hacking Repository
 
 ## User Enumeration
 
-If the POST form returns a different answer for existing usernames rather than non existent:
+For Login forms, if the HTTP response returns a different answer for existing usernames rather than non existent:
 
     $ ffuf -w /usr/share/wordlists/[usernames.txt] -u http:/targetsite.com -H "Content-Type: application/x-www-form-urlencoded" -X POST -d "name_parameter=FUZZ&password_parameter=randompass" -[mx] [number or "string for mr"]
 
@@ -72,6 +72,8 @@ Where the match criteria is used in order to print only some matching Responses:
 | ml   | Match amount of lines in response                   |
 | ms   | Match HTTP response size                            |
 
+But you can also exploit the registration form where the "Username already exist" response will be provided.
+
 # Exploitation
 
 # Privilege Escalation
@@ -83,7 +85,11 @@ Where the match criteria is used in order to print only some matching Responses:
 
 ### Brute Force
 
-### Subdomain Enumeration
+#### Authentication bypass
+
+    $ ffuf -w usernames.txt:W1,passwords.txt:W2 -X POST -d "username=W1&password=W2" -H "Content-Type: application/x-www-form-urlencoded" -u http://MACHINE_IP/customers/login -fx [number or "string for fr"]
+    
+Where -fx could be {fc | fw | fr | fl | fs} which are dual with respect to the matching criteria. For example -fc 200 will return only answers with response codes different from 200 (e.g. 301 permanent redirects for correct login)
 
 ### IDOR
 
