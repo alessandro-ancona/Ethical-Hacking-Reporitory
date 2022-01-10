@@ -19,13 +19,18 @@ EHR - Ethical Hacking Repository
       
 3. **dig**: $ dig [@optional-resolver] targetdomain.com [T]
 4. **DNSDumpster**
-5. **nmap**: $ nmap -sC -sV -A -O [target_ip] 
 
 ## Active Information Gathering
 
+### Manual Active Inf. G.
+
 1. **ping**: $ ping -n 10 [target_ip]
 2. **traceroute**: $ traceroute [target_ip or domain name]
-3. **telnet**: $ telnet [target_ip] [port] 
+3. **telnet**: $ telnet [target_ip] [port]
+
+### Automated Active Inf. G.
+
+**nmap**: $ nmap -sC -sV -A -O [target_ip] 
 
 # Enumeration/Scanning
 
