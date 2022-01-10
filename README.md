@@ -3,9 +3,24 @@ EHR - Ethical Hacking Repository
 
 # Information Gathering
 
-## Active Information Gathering
-
 ## Passive Information Gathering
+
+1. whois: $ whois targetdomain.com
+2. nslookup: $ nslookup -type=<T> targetdomain.com <optional-resolver>
+      
+      | <T>   | Result             |
+      |-------|--------------------|
+      | A     | IPv4 Addresses     |
+      | AAAA  | IPv6 Addresses     |
+      | CNAME | Canonical Name     |
+      | MX    | Mail Servers       |
+      | SOA   | Start of Authority |
+      | TXT   | TXT Records        |
+      
+3. dig: $ dig <@optional-resolver> targetdomain.com <T>
+4. DNSDumpster
+
+## Active Information Gathering
 
 # Enumeration/Scanning
 
@@ -33,8 +48,8 @@ EHR - Ethical Hacking Repository
 2. Serach Engines, to reveal subdomains:
       - GOOGLE: -site:www.targetsite.com site:* .targetsite.com
 
-3. DNS Bruteforce
-      - $ dnsrecon
+3. DNS Bruteforce:
+      - $ dnsrecon -d targetsite.com -D /usr/share/wordlists/dnsmap.txt -t std
 
 # Exploitation
 
