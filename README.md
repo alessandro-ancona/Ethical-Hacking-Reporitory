@@ -124,11 +124,11 @@ All reverse shells are available at [Reverse Shell Cheat Sheet](https://github.c
 
 1. Check Python version and execute the command
   
-    python -c 'import pty;pty.spawn("/bin/bash")'
+       python -c 'import pty;pty.spawn("/bin/bash")'
     
-2.
+2. Get access to term commands
 
-    export TERM=xterm
+       export TERM=xterm
     
 3. Cntrl + Z
 
