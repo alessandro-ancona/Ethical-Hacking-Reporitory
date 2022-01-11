@@ -52,8 +52,14 @@ EHR - Ethical Hacking Repository
       | intitle  | intitle:admin       | results that contain the specified word in title |
 
 6. Automated Content Discovery:
-     - $ gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-1.0.txt -u http:/targetsite.com/
-     - $ gobuster -u http://targetsite.com -w /usr/share/wordlists/dirbuster/directory-list-1.0.txt -x php,sh,txt,cgi,html,js,css
+
+```bash
+gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-1.0.txt -u http:/targetsite.com/ 
+```
+
+```bash 
+gobuster -u http://targetsite.com -w /usr/share/wordlists/dirbuster/directory-list-1.0.txt -x php,sh,txt,cgi,html,js,css
+```
 
 ### Subdomain Enumeration
 
@@ -62,13 +68,14 @@ EHR - Ethical Hacking Repository
       - GOOGLE: -site:www.targetsite.com site:* .targetsite.com
 
 3. DNS Bruteforce:
-      - $ dnsrecon -d targetsite.com -D /usr/share/wordlists/dnsmap.txt -t std
+           
+       dnsrecon -d targetsite.com -D /usr/share/wordlists/dnsmap.txt -t std
 
 ### Username Enumeration
 
 For Login forms, if the HTTP response returns a different answer for existing usernames rather than non existent:
 
-    $ ffuf -w /usr/share/wordlists/[usernames.txt] -u http:/targetsite.com -H "Content-Type: application/x-www-form-urlencoded" -X POST -d "name_parameter=FUZZ&password_parameter=randompass" -[mx] [number or "string for mr"]
+    ffuf -w /usr/share/wordlists/[usernames.txt] -u http:/targetsite.com -H "Content-Type: application/x-www-form-urlencoded" -X POST -d "name_parameter=FUZZ&password_parameter=randompass" -[mx] [number or "string for mr"]
 
 Where the match criteria is used in order to print only some matching Responses:
 
@@ -98,18 +105,26 @@ But you can also exploit the registration form where the "Username already exist
 8. Users on the system: $ cat /etc/passwd (Check also if it is writable)
 9. Existing communications: $ netstat -a; $ netstat -ano
 10. Find interesting files:
-      - $ find / -name flag1.txt 2>/dev/null
+         
+        find / -name flag1.txt 2>/dev/null
+         
 11. Find writable or executable folders:
-      - $ find / -perm -o w -type d 2>/dev/null
-      - $ find / -perm -o x -type d 2>/dev/nul
+
+      ```bash
+      find / -perm -o w -type d 2>/dev/null
+      ```
+      ```bash 
+      find / -perm -o x -type d 2>/dev/nul
+      ```
 12. Find SUID bit files (Executables with higher privileges):
-      . $ find / -perm -u=s -type f 2>/dev/null
+
+        find / -perm -u=s -type f 2>/dev/null
 
 #### Automated Tools
 
-1. [LinPEAS](https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh)
-2. [Linux Exploit Suggester](https://raw.githubusercontent.com/mzet-/linux-exploit-suggester/master/linux-exploit-suggester.sh)
-3. [LinEnum](https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh)
+1. [LinPeas](https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh)
+2. [Linux Exploit Suggester]
+3. [LinEnum]
  
 # Exploitation
 
