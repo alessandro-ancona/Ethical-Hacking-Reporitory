@@ -52,8 +52,8 @@ EHR - Ethical Hacking Repository
       | intitle  | intitle:admin       | results that contain the specified word in title |
 
 6. Automated Content Discovery:
-     - $ gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-1.0.txt -u http:/target.com/
-     - $ gobuster -u http://[IP-address] -w /usr/share/wordlists/dirbuster/directory-list-1.0.txt -x php,sh,txt,cgi,html,js,css
+     - $ gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-1.0.txt -u http:/targetsite.com/
+     - $ gobuster -u http://targetsite.com -w /usr/share/wordlists/dirbuster/directory-list-1.0.txt -x php,sh,txt,cgi,html,js,css
 
 ### Subdomain Enumeration
 
