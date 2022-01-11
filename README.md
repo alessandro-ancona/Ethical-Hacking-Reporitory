@@ -123,8 +123,8 @@ But you can also exploit the registration form where the "Username already exist
 #### Automated Tools
 
 1. [LinPeas](https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh)
-2. [Linux Exploit Suggester]
-3. [LinEnum]
+2. [Linux Exploit Suggester](https://raw.githubusercontent.com/mzet-/linux-exploit-suggester/master/linux-exploit-suggester.sh)
+3. [LinEnum](https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh)
  
 # Exploitation
 
