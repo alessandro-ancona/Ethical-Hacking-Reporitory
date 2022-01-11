@@ -53,6 +53,7 @@ EHR - Ethical Hacking Repository
 
 6. Automated Content Discovery:
      - $ gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-1.0.txt -u http:/target.com/
+     - $ gobuster -u http://[IP-address] -w /usr/share/wordlists/dirbuster/directory-list-1.0.txt -x php,sh,txt,cgi,html,js,css
 
 ### Subdomain Enumeration
 
