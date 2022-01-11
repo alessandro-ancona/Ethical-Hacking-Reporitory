@@ -148,6 +148,21 @@ All reverse shells are available at [Reverse Shell Cheat Sheet](https://github.c
 
 ### Authenitcation Bypass
 
+1. Always look for .js or .php authentication scripts through Network tab (Advanced Tools F12), BurpSuite or Content Discovery. You could encounter authentication flaws.
+2. Check Cookies, try to decode them
+
+### Brute Force
+
+```bash
+
+ffuf -w passwords.txt -X POST -d "username=username&password=password" -H "Content-Type: application/x-www-form-urlencoded" -u http://MACHINE_IP/customers/login -[fx] [number or "string for fr"]
+
+ffuf -w usernames.txt:W1,passwords.txt:W2 -X POST -d "username=W1&password=W2" -H "Content-Type: application/x-www-form-urlencoded" -u http://MACHINE_IP/customers/login -[fx] [number or "string for fr"]
+
+```
+
+Where -fx could be {fc | fw | fr | fl | fs} which are dual with respect to the matching criteria. For example -fc 200 will return only answers with response codes different from 200 (e.g. 301 permanent redirects for correct login)
+
 ### IDOR
 
 ### LFI & RFI
@@ -214,15 +229,3 @@ Once identified Kernel version, search for exploits for the kernel version of th
 ### Brute Force
 
 #### Website Authentication bypass
-
-    $ ffuf -w usernames.txt:W1,passwords.txt:W2 -X POST -d "username=W1&password=W2" -H "Content-Type: application/x-www-form-urlencoded" -u http://MACHINE_IP/customers/login -fx [number or "string for fr"]
-    
-Where -fx could be {fc | fw | fr | fl | fs} which are dual with respect to the matching criteria. For example -fc 200 will return only answers with response codes different from 200 (e.g. 301 permanent redirects for correct login)
-
-### IDOR
-
-### LFI & RFI
-
-### XSS
-
-### SQL Injection
