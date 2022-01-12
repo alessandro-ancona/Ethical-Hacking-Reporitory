@@ -30,7 +30,7 @@ EHR - Ethical Hacking Repository
 
 ### Automated Active Inf. G.
 
-**nmap**: $ nmap -sC -sV -A -O [target_ip] 
+**nmap**: $ nmap -A -T4 [target_ip] 
 
 # Enumeration/Scanning
 
