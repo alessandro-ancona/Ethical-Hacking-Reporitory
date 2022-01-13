@@ -8,8 +8,8 @@ A definitive guide to Ethical Hacking
 
 ## Passive Information Gathering
 
-- **whois**: $ whois targetdomain.com
-- **nslookup**: $ nslookup -type=[T] targetdomain.com [optional-resolver]
+- **whois**: `whois targetdomain.com`
+- **nslookup**: `nslookup -type=[T] targetdomain.com [optional-resolver]`
       
      | [T]   | Result             |
      |-------|--------------------|
@@ -20,20 +20,21 @@ A definitive guide to Ethical Hacking
      | SOA   | Start of Authority |
      | TXT   | TXT Records        |
       
-- **dig**: $ dig [@optional-resolver] targetdomain.com [T]
-- **DNSDumpster**
+- **dig**: `dig [@optional-resolver] targetdomain.com [T]`
+- [**DNSDumpster**](https://dnsdumpster.com/)
+- [**Shodan.io**](https://www.shodan.io/)
 
 ## Active Information Gathering
 
 ### Manual Active Inf. G.
 
-- **ping**: $ ping -n 10 [target_ip]
-- **traceroute**: $ traceroute [target_ip or domain name]
-- **telnet**: $ telnet [target_ip] [port]
+- **ping**: `ping -n 10 [target_ip]`
+- **traceroute**: `traceroute [target_ip or domain name]`
+- **telnet**: `telnet [target_ip] [port]`
 
 ### Automated Active Inf. G.
 
-- **nmap**: $ nmap -A -T4 [target_ip] 
+- **nmap**: `nmap -A -T4 [target_ip]`
 
 # Enumeration/Scanning
 
@@ -41,8 +42,8 @@ A definitive guide to Ethical Hacking
 
 ### Web Content Discovery
 
-- Check http://targetsite.com/robots.txt for hidden folders or files;
-- Check http://targetsite.com/sitemap.xml for website architecture and hidden areas;
+- Check `http://targetsite.com/robots.txt` for hidden folders or files;
+- Check `http://targetsite.com/sitemap.xml` for website architecture and hidden areas;
 - Check HTTP Response Header fields such as: "Server" (OS and version) and "X-Powered-By" (web langauge version);
 - Check Framework Stack version and vulnerabilities;
 - Google Dorking:
@@ -72,7 +73,7 @@ gobuster -u http://targetsite.com -w /usr/share/wordlists/dirbuster/directory-li
 
 - Check TLS Certificate;
 - Serach Engines, to reveal subdomains:
-      - GOOGLE: -site:www.targetsite.com site:* .targetsite.com
+      - GOOGLE: `-site:www<span></span>.targetsite.com site:* .targetsite.com`
 
 - DNS Bruteforce:
            
@@ -197,7 +198,7 @@ IDOR stands for Insecure Direct Object Reference. It is a kind of access control
 
 ### LFI & RFI
 
-LFI stands for Local File Inclusion, which is a technique where an attacker tricks a web application to retrieve a specific file from the system through a bad sanitized input form or query. It happens, for example, when requesting http://targetsite.com/get.php?file=userCV.pdf. If the "get.php" script is bad designed, a malicious user could force http://targetsite.com/get.php?file=/etc/passwd, getting all users on the system. LFI exploits PHP functions such as **include**, **require**, **include_once** and **require_once**.
+LFI stands for Local File Inclusion, which is a technique where an attacker tricks a web application to retrieve a specific file from the system through a bad sanitized input form or query. It happens, for example, when requesting `http://targetsite.com/get.php?file=userCV.pdf`. If the "get.php" script is bad designed, a malicious user could force `http://targetsite.com/get.php?file=/etc/passwd`, getting all users on the system. LFI exploits PHP functions such as **include**, **require**, **include_once** and **require_once**.
 
 
 ### SSRF
@@ -214,15 +215,15 @@ LFI stands for Local File Inclusion, which is a technique where an attacker tric
 
 #### Manual Enumeration
 
-- Hostname: $ hostname
-- System information (Kernel Exploiting): $ uname -a
-- Processes information: $ cat /proc/version
-- OS version: $ cat /etc/os-release
-- Processes List: $ ps aux
-- Check root privileges on current user: $ sudo -l
-- User privilege and membership: $ id
-- Users on the system: $ cat /etc/passwd (Check also if it is writable)
-- Existing communications: $ netstat -a; $ netstat -ano
+- Hostname: `hostname`
+- System information (Kernel Exploiting): `uname -a`
+- Processes information: `cat /proc/version`
+- OS version:`cat /etc/os-release`
+- Processes List: `ps aux`
+- Check root privileges on current user:` sudo -l`
+- User privilege and membership:` id`
+- Users on the system: `cat /etc/passwd` (Check also if it is writable)
+- Existing communications: `netstat -a`; `netstat -ano`
 - Look for interesting files:
          
       find / -name flag1.txt 2>/dev/null
