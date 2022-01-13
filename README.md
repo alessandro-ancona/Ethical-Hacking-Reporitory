@@ -188,7 +188,17 @@ Where -fx could be {fc | fw | fr | fl | fs} which are dual with respect to the m
 
 ### IDOR
 
+IDOR stands for Insecure Direct Object Reference. It is a kind of access control vulnerability arised when an applicetion uses user-input to access directly to objects. IDOR first appeared in OWASP 2007 Top Ten. IDOR is associated with Horizontal Privilege Escalation where an attacker could access reserved object by crafting a specific query.
+
+- Check for IDOR vulnerabilities in encoded HTTP Response or Request Header fields.
+- Check for IDOR vulnerabilities in Hashed ID and try to reverse them through [crackstation](https://crackstation.net/)
+- Check for IDOR effectiveness by using two different accounts trying to switch among them.
+- Check for ALL parameters in Network Tab of browser development tools (F12) for calls to any endpoint.
+
 ### LFI & RFI
+
+LFI stands for Local File Inclusion, which is a technique where an attacker tricks a web application to retrieve a specific file from the system through a bad sanitized input form or query. It happens, for example, when requesting http://targetsite.com/get.php?file=userCV.pdf. If the "get.php" script is bad designed, a malicious user could force http://targetsite.com/get.php?file=/etc/passwd, getting all users on the system. LFI exploits PHP functions such as **include**, **require**, **include_once** and **require_once**.
+
 
 ### SSRF
 
