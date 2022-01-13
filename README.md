@@ -41,8 +41,8 @@ A definitive guide to Ethical Hacking
 
 ### Web Content Discovery
 
-- Check http:/targetsite.com/robots.txt for hidden folders or files;
-- Check http:/targetsite.com/sitemap.xml for website architecture and hidden areas;
+- Check http://targetsite.com/robots.txt for hidden folders or files;
+- Check http://targetsite.com/sitemap.xml for website architecture and hidden areas;
 - Check HTTP Response Header fields such as: "Server" (OS and version) and "X-Powered-By" (web langauge version);
 - Check Framework Stack version and vulnerabilities;
 - Google Dorking:
