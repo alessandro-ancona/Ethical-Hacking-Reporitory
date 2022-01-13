@@ -8,14 +8,14 @@ EHR - Ethical Hacking Repository
 - **whois**: $ whois targetdomain.com
 - **nslookup**: $ nslookup -type=[T] targetdomain.com [optional-resolver]
       
-      | [T]   | Result             |
-      |-------|--------------------|
-      | A     | IPv4 Addresses     |
-      | AAAA  | IPv6 Addresses     |
-      | CNAME | Canonical Name     |
-      | MX    | Mail Servers       |
-      | SOA   | Start of Authority |
-      | TXT   | TXT Records        |
+     | [T]   | Result             |
+     |-------|--------------------|
+     | A     | IPv4 Addresses     |
+     | AAAA  | IPv6 Addresses     |
+     | CNAME | Canonical Name     |
+     | MX    | Mail Servers       |
+     | SOA   | Start of Authority |
+     | TXT   | TXT Records        |
       
 - **dig**: $ dig [@optional-resolver] targetdomain.com [T]
 - **DNSDumpster**
@@ -44,12 +44,12 @@ EHR - Ethical Hacking Repository
 - Check Framework Stack version and vulnerabilities;
 - Google Dorking:
       
-      | Filter   | Example             | Description                                      |
-      |----------|---------------------|--------------------------------------------------|
-      | site     | site:targetsite.com | results only from specified URL                  |
-      | inurl    | inurl:admin         | results that have specified word in URL          |
-      | filetype | filetype:pdf        | results which are a particular type of file ext. |
-      | intitle  | intitle:admin       | results that contain the specified word in title |
+     | Filter   | Example             | Description                                      |
+     |----------|---------------------|--------------------------------------------------|
+     | site     | site:targetsite.com | results only from specified URL                  |
+     | inurl    | inurl:admin         | results that have specified word in URL          |
+     | filetype | filetype:pdf        | results which are a particular type of file ext. |
+     | intitle  | intitle:admin       | results that contain the specified word in title |
 
 - Automated Content Discovery:
 
@@ -79,13 +79,13 @@ For Login forms, if the HTTP response returns a different answer for existing us
 
 Where the match criteria is used in order to print only some matching Responses:
 
-| [mx] | Result                                              |
-|------|-----------------------------------------------------|
-| mc   | Match code (200, 204, 301, 302, 307, 401, 403, 405) |
-| mw   | Match amount of words in response                   |
-| mr   | Match defined "string" in response                  |
-| ml   | Match amount of lines in response                   |
-| ms   | Match HTTP response size                            |
+   | [mx] | Result                                              |
+   |------|-----------------------------------------------------|
+   | mc   | Match code (200, 204, 301, 302, 307, 401, 403, 405) |
+   | mw   | Match amount of words in response                   |
+   | mr   | Match defined "string" in response                  |
+   | ml   | Match amount of lines in response                   |
+   | ms   | Match HTTP response size                            |
 
 But you can also exploit the registration form where the "Username already exist" response will be provided.
 
