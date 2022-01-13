@@ -1,4 +1,6 @@
-EHR - Ethical Hacking Repository
+<h1 color=#feffff> EHR - Ethical Hacking Repository </h1>
+
+A definitive guide to Ethical Hacking
 
 
 # Information Gathering
