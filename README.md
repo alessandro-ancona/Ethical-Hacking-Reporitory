@@ -1,7 +1,8 @@
-<h1 color=#feffff> EHR - Ethical Hacking Repository </h1>
+# EHR - Ethical Hacking Repository
 
 A definitive guide to Ethical Hacking
 
+![](https://images.everyeye.it/img-notizie/mr-robot-scioccante-immagine-personaggio-morto-finale-premiere-v3-404092.jpg)
 
 # Information Gathering
 
