@@ -36,68 +36,7 @@ A definitive guide to Ethical Hacking
 
 - **nmap**: `nmap -A -T4 [target_ip]`
 
-# Enumeration/Scanning
-
-## Pre-Access
-
-### Web Content Discovery
-
-- Check `http://targetsite.com/robots.txt` for hidden folders or files;
-- Check `http://targetsite.com/sitemap.xml` for website architecture and hidden areas;
-- Check HTTP Response Header fields such as: "Server" (OS and version) and "X-Powered-By" (web langauge version);
-- Check Framework Stack version and vulnerabilities;
-- Google Dorking:
-      
-     | Filter   | Example             | Description                                      |
-     |----------|---------------------|--------------------------------------------------|
-     | site     | site:targetsite.com | results only from specified URL                  |
-     | inurl    | inurl:admin         | results that have specified word in URL          |
-     | filetype | filetype:pdf        | results which are a particular type of file ext. |
-     | intitle  | intitle:admin       | results that contain the specified word in title |
-
-- Automated Content Discovery:
-
-```bash
-
-gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-1.0.txt -u http:/targetsite.com/ 
-
-```
-
-```bash 
-
-gobuster -u http://targetsite.com -w /usr/share/wordlists/dirbuster/directory-list-1.0.txt -x php,sh,txt,cgi,html,js,css
-
-```
-
-### Subdomain Enumeration
-
-- Check TLS Certificate;
-- Serach Engines, to reveal subdomains:
-      - GOOGLE: `-site:www<span></span>.targetsite.com site:* .targetsite.com`
-
-- DNS Bruteforce:
-           
-      dnsrecon -d targetsite.com -D /usr/share/wordlists/dnsmap.txt -t std
-
-### Username Enumeration
-
-For Login forms, if the HTTP response returns a different answer for existing usernames rather than non existent:
-
-    ffuf -w /usr/share/wordlists/[usernames.txt] -u http:/targetsite.com -H "Content-Type: application/x-www-form-urlencoded" -X POST -d "name_parameter=FUZZ&password_parameter=randompass" -[mx] [number or "string for mr"]
-
-Where the match criteria is used in order to print only some matching Responses:
-
-   | [mx] | Result                                              |
-   |------|-----------------------------------------------------|
-   | mc   | Match code (200, 204, 301, 302, 307, 401, 403, 405) |
-   | mw   | Match amount of words in response                   |
-   | mr   | Match defined "string" in response                  |
-   | ml   | Match amount of lines in response                   |
-   | ms   | Match HTTP response size                            |
-
-But you can also exploit the registration form where the "Username already exist" response will be provided.
-
-# Gaining Access
+# Gaining Access/Enumeration
 
 ## SSH
 
@@ -264,7 +203,7 @@ All reverse shells are available at [Reverse Shell Cheat Sheet](https://github.c
 
       find / -name ".*" 2>/dev/null
 
-#### Automated Tools
+#### Automated Enumeration
 
 - [LinPeas](https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh)
 - [Linux Exploit Suggester](https://raw.githubusercontent.com/mzet-/linux-exploit-suggester/master/linux-exploit-suggester.sh)
