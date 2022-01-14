@@ -118,6 +118,34 @@ But you can also exploit the registration form where the "Username already exist
   And then access the system.
   
       ssh -i priv_rsa.txt [username]@[ip-address]
+      
+## SMB
+
+Server Message Block is a client-server protocol used for sharing files, printers and other resources on a network. A client (generally) connects to a server using NetBIOS over TCP/IP. SMB first use in enterprise and private environments is the possibility to setup shared folders accessible from the network.
+
+### Enumerating SMB
+
+Once you discover port 139 and 445 as open you can enumerate SMB service through `enum4linux`:
+
+      enum4linux -a [victim-ip]
+
+Here you must look for:
+
+- Domain Name
+- Shared folders name
+- Anonymous access
+- Local Usernames
+
+1. Once you find some username the tip is trying to bruteforce them by means of the metasploit module `auxiliary/scanner/smb/smb_login`. (Try also to SSH bruteforce with same usernames)
+2. Try to access the shared folder looking for interesting files such as usernames, credentials or sensitive infos:
+
+       smbclient -W '[WG_NAME]' //'[victim-ip]'/[shared-folder] -U'[username]'%'[password]'
+
+If anonymous access is allowd, set the [username] and [password] field blank.
+
+3. Check for EternalBlue vulnerability through `auxiliary/scanner/smb/smb_ms17_010`
+
+## FTP
 
 ## Getting a reverse shell
 
