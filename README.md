@@ -2,7 +2,7 @@
 
 A definitive guide to Ethical Hacking
 
-![]()
+![](https://github.com/alessandro-ancona/Ethical-Hacking-Repository/blob/main/mrrobot.jpg)
 
 # Information Gathering
 
