@@ -2,7 +2,7 @@
 
 A definitive guide to Ethical Hacking
 
-![](https://images.everyeye.it/img-notizie/mr-robot-scioccante-immagine-personaggio-morto-finale-premiere-v3-404092.jpg)
+![drawing](https://images.everyeye.it/img-notizie/mr-robot-scioccante-immagine-personaggio-morto-finale-premiere-v3-404092.jpg)
 
 # Information Gathering
 
