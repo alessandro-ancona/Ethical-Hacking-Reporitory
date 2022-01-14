@@ -248,7 +248,7 @@ For all other LFI-2-RCE (via /proc/self/environ, via upload, via PHPSESSID, via 
 - OS version:`cat /etc/os-release`
 - Processes List: `ps aux`
 - Check root privileges on current user:` sudo -l`
-- User privilege and [membership](): `id`
+- User privilege and group [membership](https://github.com/alessandro-ancona/Ethical-Hacking-Repository/blob/main/group_exploiting.md): `id`
 - Users on the system: `cat /etc/passwd` (Check also if it is writable)
 - Existing communications: `netstat -a`; `netstat -ano`
 - Look for interesting files:
