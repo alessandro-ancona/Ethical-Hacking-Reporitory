@@ -136,6 +136,8 @@ Here you must look for:
 - Anonymous access
 - Local Usernames
 
+### Exploiting SMB
+
 1. Once you find some username the tip is trying to bruteforce them by means of the metasploit module `auxiliary/scanner/smb/smb_login`. (Try also to SSH bruteforce with same usernames)
 2. Try to access the shared folder looking for interesting files such as usernames, credentials or sensitive infos:
 
@@ -146,6 +148,10 @@ If anonymous access is allowd, set the [username] and [password] field blank.
 3. Check for EternalBlue vulnerability through `auxiliary/scanner/smb/smb_ms17_010`
 
 ## FTP
+
+### Enumerating FTP
+
+### Exploiting FTP
 
 ## Getting a reverse shell
 
