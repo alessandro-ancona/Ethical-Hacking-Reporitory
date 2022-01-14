@@ -20,7 +20,7 @@ A definitive guide to Ethical Hacking
      | SOA   | Start of Authority |
      | TXT   | TXT Records        |
       
-- **dig**: `dig [@optional-resolver] targetdomain.com [T]`
+- **dig**: `dig @[optional-resolver] targetdomain.com [T]`
 - [**DNSDumpster**](https://dnsdumpster.com/)
 - [**Shodan.io**](https://www.shodan.io/)
 
