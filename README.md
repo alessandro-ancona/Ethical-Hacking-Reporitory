@@ -165,7 +165,7 @@ All reverse shells are available at [Reverse Shell Cheat Sheet](https://github.c
 
 ### Device enumeration
 
-#### Manual Enumeration
+#### Manual Linux Enumeration
 
 - Hostname: `hostname`
 - System information (Kernel Exploiting): `uname -a`
@@ -194,21 +194,49 @@ All reverse shells are available at [Reverse Shell Cheat Sheet](https://github.c
 
       getcap -r / 2>/dev/null
         
-- Check cronjobs
-
-      cat /etc/crontab
-        
+- Check cronjobs: `cat /etc/crontab`   
 - Check for writable folders in $PATH
 - Check hidden files
 
       find / -name ".*" 2>/dev/null
 
-#### Automated Enumeration
+#### Automated Linux Enumeration
 
 - [LinPeas](https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh)
 - [Linux Exploit Suggester](https://raw.githubusercontent.com/mzet-/linux-exploit-suggester/master/linux-exploit-suggester.sh)
 - [LinEnum](https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh)
+
+#### Manual Windows Enumeration
+
+- Hostname: `hostname`
+- All system information: `systeminfo | findstr /B /C:"OS Name" /C:"OS Version`
+- Current user's privileges:  `whoami /priv`
+- List users: `net users`
+- List details of a user: `net user [username]`
+- List groups on the system: `net localgroup`
+- List members of a specific group: `net localgroup [groupname]`
+- OS Name & Version: `systeminfo`
+- Machine Services list: `wmic service get name,displayname,pathname,startmode`
+- Running Services list: `wmic service list brief | findstr  "Running"`
+- List additional information: `sc qc [service-name]`
+- Patch level list: `wmic qfe get Caption,Description,HotFixID,InstalledOn`
+- Check Windows Defender: `sc query windefend`
+- Installed software list: `wmic product get name,version,vendor`
+- Existing communications: `netstat -a`; `netstat -ano`
+- Look for interesting files: `dir /s /p [filename.txt]`         
+- Check scheduled tasks: `schtasks /query /fo LIST /v`
+- Check driver updates: `driverquery`
+- Check for writable folders in $PATH
+
+#### Automated Windows Enumeration
  
+- [PowerUp.ps1](https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/master/Privesc/PowerUp.ps1)
+
+      .\PowerUp.ps1
+      Invoke-AllChecks
+ 
+- [WinPeas]()
+
 # Exploitation
 
 ## Kernel Exploitation
