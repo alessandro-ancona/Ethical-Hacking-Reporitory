@@ -257,4 +257,45 @@ Check for backup scripts and check for write permissions.
 
 # Privilege Escalation
 
+## Linux PrivEsc
+
+## Windows PrivEsc
+
+### Token Impersonation
+
+Windows tokens are used to ensure user authorization. Access tokens are assigned to an account when it logs in ([Access Tokens](https://docs.microsoft.com/en-us/windows/win32/secauthz/access-tokens)). There are two types of access tokens:
+- Primary Access tokens: associated to an account at log on;
+- Impersonation tokens: associated to an account after the log on, describing the security context of the client being impersonated ([Impersonation Tokens](https://docs.microsoft.com/en-us/windows/win32/secauthz/impersonation-tokens)).
+
+Check current user privileges: `whoami /priv`. The most commonly abused privileges are:
+
+- SeImpersonatePrivilege
+- SeAssignPrimaryPrivilege
+- SeTcbPrivilege
+- SeBackupPrivilege
+- SeRestorePrivilege
+- SeCreateTokenPrivilege
+- SeLoadDriverPrivilege
+- SeTakeOwnershipPrivilege
+- SeDebugPrivilege
+
+Info on how to exploit them [here](https://www.exploit-db.com/papers/42556)
+
+#### SeImpersonatePrivilege
+
+- Open a meterpreter session
+- Load the incognito module
+- List available tokens: `list_tokens -g`
+- If BUILTIN\Administrators is available use: `impersonate_token "BUILTIN\Administrators"`
+- Check current privileges: `getuid`
+
+You still won't be able to get Admin privileges because the current process privilege (meterpreter payload) is the client privilege. You must accordingly migrate the meterpreter session to a process with correct permissions (eg. services.exe).
+
+- Show processes PID: `ps`
+- Migrate to a correct service (eg. services.exe): `migrate [services.exe PID]`
+
+### DLL Hijacking
+
+### Unquoted Service Path
+
 # Post-Exploitation
