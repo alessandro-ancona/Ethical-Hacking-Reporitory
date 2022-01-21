@@ -279,7 +279,7 @@ Check current user privileges: `whoami /priv`. The most commonly abused privileg
 - SeTakeOwnershipPrivilege
 - SeDebugPrivilege
 
-Info on how to exploit them [here](https://www.exploit-db.com/papers/42556)
+Info on how to exploit them [here](https://www.exploit-db.com/papers/42556).
 
 #### SeImpersonatePrivilege
 
