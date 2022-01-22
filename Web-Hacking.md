@@ -141,7 +141,7 @@ Once checked for RFI vulnerability on a remote web application, suppose that a R
       
 - Finally, set the PHP bind shell as payload: `set PAYLOAD php/bind_php` and set for LHOST and LPORT of the attacker machine.
 
-If configured properly, a direct shell will open up.
+If configured properly, a direct shell will pop up.
 
 # SSRF
 
