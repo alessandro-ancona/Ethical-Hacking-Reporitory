@@ -124,3 +124,14 @@ For all other LFI-2-RCE (via /proc/self/environ, via upload, via PHPSESSID, via 
 # Command Injection
 
 # SQL Injection
+
+Structured Query Language (SQL) is a standarized language for relational databases (RDBMS). It can be used to create and modify database schema, to create and modify stored data and query them. On the other hand, a Database Management System (DBMS) is a software meant for the efficient creation, management and querying of databases. Examples of DBMS are the opensource softwares MySQL, SQLite, PostgreSQL.
+SQL Injection is the vulnerability of websites that accept unsanitized data from input forms and forward them as a query to databases. There are several types of SQLi:
+
+- In-band-SQLi: further divided in
+      - Error-based SQLi: you gain info about database structure directly from
+      - Union-based SQLi
+- Blind-SQLi:
+
+
+
