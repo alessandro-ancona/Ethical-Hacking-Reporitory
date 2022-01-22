@@ -129,8 +129,10 @@ Structured Query Language (SQL) is a standarized language for relational databas
 SQL Injection is the vulnerability of websites that accept unsanitized data from input forms and forward them as a query to databases. There are several types of SQLi:
 
 - **In-band-SQLi**: further divided in
-      - *Error-based SQLi*: you gain info about database structure directly from the browser error answer
-      - *Union-based SQLi*: makes use of the UNION clause in order to insert in an "empty" server answer, the SELECT data of our interest.
+
+     - **Error-based SQLi**: you gain info about database structure directly from the browser error answer
+     - **Union-based SQLi**: makes use of the UNION clause in order to insert in an "empty" server answer, the SELECT data of our interest.
+
 - **Blind-SQLi**: in this case you must apply a deductive method, making qeries and waiting for positive or negative answer (Boolean-SQLi). For example, by means of the SLEEP(2); it is possible to verify the answer, if the asnwer comes after 2s, this means "True", otherwise it is "False".
 
 ## Manual SQLi
