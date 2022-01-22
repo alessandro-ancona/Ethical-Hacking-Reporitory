@@ -75,6 +75,15 @@ Here you must look for:
 - Anonymous access
 - Local Usernames
 
+For discovering shared folders name you could also use `smbmap` tool:
+
+      Enumerate shared folders ---
+      smbmap -d WORKGROUP -H [victim-ip]
+      
+      Enumerate folders and permissions for user ---
+      smbmap -d WORKGROUP -u [username] -p [password] -H [victim-ip]
+
+
 ### Exploiting SMB
 
 1. Once you find some username the tip is trying to bruteforce them by means of the metasploit module `auxiliary/scanner/smb/smb_login`. (Try also to SSH bruteforce with same usernames)
