@@ -91,7 +91,7 @@ For discovering shared folders name you could also use `smbmap` tool:
 
        smbclient -W '[WG_NAME]' //'[victim-ip]'/[shared-folder] -U'[username]'%'[password]'
 
-If anonymous access is allowd, set the [username] and [password] field blank.
+If anonymous access is allowd, leave the [username] and [password] field blank.
 
 3. Check for EternalBlue vulnerability through `auxiliary/scanner/smb/smb_ms17_010`
 
