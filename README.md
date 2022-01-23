@@ -191,9 +191,9 @@ All reverse shells are available at [Reverse Shell Cheat Sheet](https://github.c
          
 - Find writable or executable folders:
       
-      find / -perm -o w -type d 2>/dev/null
+      find / -writable -type d 2>/dev/null
       
-      find / -perm -o x -type d 2>/dev/nul
+      find / -executable -type d 2>/dev/null
       
 - Find SUID bit files (Executables with higher privileges):
 
