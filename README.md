@@ -326,3 +326,15 @@ You still won't be able to get Admin privileges because the current process priv
 ### Unquoted Service Path
 
 # Post-Exploitation
+
+## Hash Cracking using JohnTheRipper
+
+Set a text file with the raw hash to be cracked. Then, knowing the hash type:
+
+      john --wordlist=/usr/share/wordlists/rockyou.txt --format=raw-SHA256 hash.txt
+      
+If you need to crack a salted hash, then define the hash format, such as:
+
+      john --wordlist=/usr/share/wordlists/rockyou.txt --format='dynamic=sha512($p.$s)' password.txt
+      
+Where the `password.txt` file contains the hash in the format `hash$salt`. You can apply this to several hash format (look [here](https://pentestmonkey.net/cheat-sheet/john-the-ripper-hash-formats) for further info)
